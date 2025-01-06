@@ -100,7 +100,8 @@ func (set *MessageSet) PrintMessages(killChan chan byte) {
 			}
 		}
 
-		time.Sleep(500 * time.Millisecond)
+		randomSleep := (rand.Intn(5) + 1) * 100
+		time.Sleep(time.Duration(randomSleep) * time.Millisecond)
 
 		select {
 		case <-killChan:
