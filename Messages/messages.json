@@ -1,0 +1,19 @@
+{
+  "sets":[
+    {
+      "flag": "default",
+      "messages": [
+        {
+          "text": "Hello, World!",
+          "minSeconds": 1,
+          "maxSeconds": 10
+        },
+        {
+          "text": "Hello again!",
+          "minSeconds": 1,
+          "maxSeconds": 10
+        }
+      ]
+    }
+  ]
+}
