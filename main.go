@@ -8,6 +8,8 @@ import (
 	"log"
 	"math/rand"
 	"os"
+	"os/exec"
+	"runtime"
 	"sync"
 	"time"
 )
@@ -81,9 +83,25 @@ func (set *MessageSet) PrintMessages(killChan chan byte) {
 	messageComplete := true
 	var messageCompletionTime time.Time
 
+	freshMessages := set.Messages
+	var staleMessages []LoadingMessage
+
 	for {
 		if messageComplete {
-			nextMessage := set.Messages[rand.Intn(len(set.Messages))]
+			var nextMessage LoadingMessage
+			if len(freshMessages) > 1 {
+				nextMessageIndex := rand.Intn(len(freshMessages))
+				nextMessage = freshMessages[nextMessageIndex]
+
+				freshMessages = append(freshMessages[:nextMessageIndex], freshMessages[nextMessageIndex+1:len(freshMessages)]...)
+				staleMessages = append(staleMessages, nextMessage)
+			} else {
+				nextMessage = freshMessages[0]
+				freshMessages = staleMessages
+				staleMessages = []LoadingMessage{}
+				clearScreen()
+			}
+
 			fmt.Print(nextMessage.Text)
 			messageComplete = false
 
@@ -100,7 +118,7 @@ func (set *MessageSet) PrintMessages(killChan chan byte) {
 			}
 		}
 
-		randomSleep := (rand.Intn(5) + 1) * 100
+		randomSleep := rand.Intn(500) + 100
 		time.Sleep(time.Duration(randomSleep) * time.Millisecond)
 
 		select {
@@ -108,5 +126,25 @@ func (set *MessageSet) PrintMessages(killChan chan byte) {
 			return
 		default:
 		}
+	}
+}
+
+func clearScreen() {
+	var cmd *exec.Cmd
+	switch runtime.GOOS {
+	case "linux", "darwin":
+		cmd = exec.Command("clear")
+		break
+	case "windows":
+		cmd = exec.Command("cls")
+	}
+	if cmd == nil {
+		log.Fatalf("unsupported platform: %v", runtime.GOOS)
+	}
+
+	cmd.Stdout = os.Stdout
+	err := cmd.Run()
+	if err != nil {
+		log.Fatalf("error clearing screen: %v", err)
 	}
 }

@@ -4,13 +4,43 @@
       "flag": "default",
       "messages": [
         {
-          "text": "Hello, World!",
+          "text": "Loading snacks",
           "minSeconds": 1,
           "maxSeconds": 10
         },
         {
-          "text": "Hello again!",
-          "minSeconds": 1,
+          "text": "Locating coffee",
+          "minSeconds": 3,
+          "maxSeconds": 10
+        },
+        {
+          "text": "Heating takes",
+          "minSeconds": 3,
+          "maxSeconds": 10
+        },
+        {
+          "text": "Finding new memes",
+          "minSeconds": 3,
+          "maxSeconds": 10
+        },
+        {
+          "text": "Paying cat tax",
+          "minSeconds": 3,
+          "maxSeconds": 10
+        },
+        {
+          "text": "Procrastinating",
+          "minSeconds": 3,
+          "maxSeconds": 10
+        },
+        {
+          "text": "Worming regards",
+          "minSeconds": 3,
+          "maxSeconds": 10
+        },
+        {
+          "text": "Hyping chat",
+          "minSeconds": 3,
           "maxSeconds": 10
         }
       ]
