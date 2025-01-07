@@ -86,6 +86,8 @@ func (set *MessageSet) PrintMessages(killChan chan byte) {
 	freshMessages := set.Messages
 	var staleMessages []LoadingMessage
 
+	clearScreen()
+
 	for {
 		if messageComplete {
 			var nextMessage LoadingMessage
@@ -123,6 +125,7 @@ func (set *MessageSet) PrintMessages(killChan chan byte) {
 
 		select {
 		case <-killChan:
+			clearScreen()
 			return
 		default:
 		}

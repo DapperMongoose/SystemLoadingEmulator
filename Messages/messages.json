@@ -4,17 +4,17 @@
       "flag": "default",
       "messages": [
         {
-          "text": "Loading snacks",
+          "text": "Foraging for snacks",
           "minSeconds": 1,
           "maxSeconds": 10
         },
         {
-          "text": "Locating coffee",
+          "text": "Brewing coffee",
           "minSeconds": 3,
           "maxSeconds": 10
         },
         {
-          "text": "Heating takes",
+          "text": "Ensuring takes are hot",
           "minSeconds": 3,
           "maxSeconds": 10
         },
