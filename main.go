@@ -19,7 +19,7 @@ type MessageFile struct {
 }
 
 type MessageSet struct {
-	Flag     string
+	SetName  string
 	Messages []LoadingMessage
 }
 
@@ -32,28 +32,20 @@ type LoadingMessage struct {
 const messageConfigFilePath = "Messages/messages.json"
 
 func main() {
+	var setFlag = flag.String("s", "default", "the set of messages to loop through")
+	flag.Parse()
+
 	file, err := os.ReadFile(messageConfigFilePath)
 	if err != nil {
 		log.Fatalf("error opening messages config: %v", err)
 	}
 
-	var messageFile MessageFile
-	err = json.Unmarshal(file, &messageFile)
+	currentSet, err := parseConfig(file, *setFlag)
 	if err != nil {
-		log.Fatalf("error decoding message config file: %v", err)
+		log.Fatalf("error loading config: %v", err)
 	}
 
-	var setFlag = flag.String("s", "default", "the set of messages to loop through")
-	flag.Parse()
-
-	var currentSet MessageSet
-	for _, set := range messageFile.Sets {
-		if set.Flag == *setFlag {
-			currentSet = set
-		}
-	}
-
-	if len(currentSet.Messages) < 1 {
+	if currentSet == nil || len(currentSet.Messages) < 1 {
 		log.Fatalf("no messages in current set %+v", currentSet)
 	}
 
@@ -135,6 +127,24 @@ func (set *MessageSet) PrintMessages(killChan chan byte) {
 		default:
 		}
 	}
+}
+
+func parseConfig(configData []byte, messageSetName string) (*MessageSet, error) {
+
+	var messageFile MessageFile
+	err := json.Unmarshal(configData, &messageFile)
+	if err != nil {
+		return nil, fmt.Errorf("error decoding message config file: %v", err)
+	}
+
+	var currentSet MessageSet
+	for _, set := range messageFile.Sets {
+		if set.SetName == messageSetName {
+			currentSet = set
+		}
+	}
+
+	return &currentSet, nil
 }
 
 func clearScreen() {

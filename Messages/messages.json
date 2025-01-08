@@ -1,7 +1,7 @@
 {
   "sets":[
     {
-      "flag": "default",
+      "SetName": "default",
       "messages": [
         {
           "text": "Foraging for snacks",
@@ -16,7 +16,7 @@
       ]
     },
     {
-      "flag": "brb",
+      "SetName": "brb",
       "messages": [
         {
           "text": "Foraging for snacks",
