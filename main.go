@@ -91,17 +91,22 @@ func (set *MessageSet) PrintMessages(killChan chan byte) {
 	for {
 		if messageComplete {
 			var nextMessage LoadingMessage
+
+			if len(staleMessages) == 0 {
+				clearScreen()
+			}
+
 			if len(freshMessages) > 1 {
 				nextMessageIndex := rand.Intn(len(freshMessages))
 				nextMessage = freshMessages[nextMessageIndex]
 
-				freshMessages = append(freshMessages[:nextMessageIndex], freshMessages[nextMessageIndex+1:len(freshMessages)]...)
+				freshMessages = append(freshMessages[:nextMessageIndex], freshMessages[nextMessageIndex+1:]...)
 				staleMessages = append(staleMessages, nextMessage)
 			} else {
 				nextMessage = freshMessages[0]
+				staleMessages = append(staleMessages, nextMessage)
 				freshMessages = staleMessages
 				staleMessages = []LoadingMessage{}
-				clearScreen()
 			}
 
 			fmt.Print(nextMessage.Text)

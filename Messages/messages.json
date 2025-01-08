@@ -12,40 +12,6 @@
           "text": "Brewing coffee",
           "minSeconds": 3,
           "maxSeconds": 10
-        },
-        {
-          "text": "Ensuring takes are hot",
-          "minSeconds": 3,
-          "maxSeconds": 10
-        },
-        {
-          "text": "Finding new memes",
-          "minSeconds": 3,
-          "maxSeconds": 10
-        },
-        {
-          "text": "Paying cat tax",
-          "minSeconds": 3,
-          "maxSeconds": 10
-        },
-        {
-          "text": "Procrastinating",
-          "minSeconds": 3,
-          "maxSeconds": 10
-        },
-        {
-          "text": "Worming regards",
-          "minSeconds": 3,
-          "maxSeconds": 10
-        },
-        {
-          "text": "Hyping chat",
-          "minSeconds": 3,
-          "maxSeconds": 10
-        },{
-          "text": "Battling stage fright",
-          "minSeconds": 3,
-          "maxSeconds": 10
         }
       ]
     },
