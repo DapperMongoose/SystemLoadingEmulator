@@ -9,3 +9,4 @@ messages.json file.
 The message sets are grouped under a label to make them selectable.  Pass the -s flag with the label of the message
 set that you would like to use.
 
+![Example.gif](Example.gif)
